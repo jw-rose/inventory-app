@@ -10,13 +10,13 @@ export const getItems = async () => {
 }
 
 export const addItem = async (name: string, quantity: number, unit: string, toBuy: boolean, quantityToBuy: number) => {
-    await db.insert(items).values({ name, quantity, unit, toBuy: quantityToBuy === 0 })
+    await db.insert(items).values({ name, quantity, unit, toBuy: quantityToBuy > 0, quantityToBuy })
     revalidatePath('/')
 }
 
 export const editItem = async (id: number, name: string, quantity: number, unit: string, toBuy: boolean, quantityToBuy: number) => {
     await db.update(items)
-    .set({ name, quantity, unit, toBuy: quantityToBuy === 0 })
+    .set({ name, quantity, unit, toBuy: quantityToBuy > 0, quantityToBuy })
     .where(eq(items.id, id))
     revalidatePath('/')
 }
