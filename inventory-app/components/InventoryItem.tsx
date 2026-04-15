@@ -14,7 +14,7 @@ export default async function ShoppingItems() {
             {allItems.map((item) => (
                 <div key={item.id} className='bg-fuchsia-100 rounded-2xl p-4'>
                     <li className='list-none text-lg sm:text-2xl flex flex-wrap gap-2 items-center'>
-                        <span className='font-semibold'>{item.name}</span>
+                        <span className=' text-gray-600 font-semibold'>{item.name}</span>
                         <span className='text-gray-600'>Qty: {item.quantity}</span>
                         <span className='text-gray-600'>Unit: {item.unit}</span>
                         <span className='text-green-600'>To buy: {item.toBuy ? 'Yes' : 'No'}</span>
