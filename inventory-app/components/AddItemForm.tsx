@@ -31,73 +31,99 @@ export default function AddItemForm() {
         }
     }
 
-    if (!isOpen) {
-        return (
-            <button
-                className='text-2xl mt-3 mb-3 bg-gray-900 text-amber-100 border-2 p-3 rounded-2xl w-full sm:w-auto'
-                onClick={() => setIsOpen(true)}
-            >
-                + Add item
-            </button>
-        )
-    }
-
+ if (!isOpen) {
     return (
-        <form className='p-4 bg-gray-200' onSubmit={handleSubmit}>
-            <div className='flex flex-col sm:flex-row flex-wrap gap-2'>
+        <button
+            className='bg-green-600 text-white font-medium px-6 py-3 rounded-full w-full sm:w-auto'
+            onClick={() => setIsOpen(true)}
+        >
+            + Add item
+        </button>
+    )
+}
+
+return (
+    <form className='bg-gray-50 border border-gray-200 rounded-xl p-4' onSubmit={handleSubmit}>
+        
+        <div className='grid grid-cols-2 sm:grid-cols-3 gap-3 mb-4'>
+
+            <div className='flex flex-col gap-1'>
+                <label className='text-sm text-gray-500'>Item name</label>
                 <input
-                    className='p-2 border-2 border-b-cyan-900 text-black rounded w-full sm:w-auto'
+                    className='border border-gray-300 rounded-lg p-2 text-black'
                     type="text"
-                    placeholder='Item name'
+                    placeholder='e.g. Eggs'
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                 />
+            </div>
+
+            <div className='flex flex-col gap-1'>
+                <label className='text-sm text-gray-500'>Quantity</label>
                 <input
-                    className='p-2 border-2 border-b-cyan-900 text-black rounded w-full sm:w-24'
+                    className='border border-gray-300 rounded-lg p-2 text-black'
                     type="number"
-                    placeholder='Quantity'
+                    placeholder='e.g. 6'
                     value={quantity}
                     onChange={(e) => setQuantity(Number(e.target.value))}
                 />
+            </div>
+
+            <div className='flex flex-col gap-1'>
+                <label className='text-sm text-gray-500'>Unit</label>
                 <input
-                    className='p-2 border-2 border-b-cyan-900 text-black rounded w-full sm:w-auto'
+                    className='border border-gray-300 rounded-lg p-2 text-black'
                     type="text"
-                    placeholder='Unit'
+                    placeholder='e.g. box'
                     value={unit}
                     onChange={(e) => setUnit(e.target.value)}
                 />
+            </div>
+
+            <div className='flex flex-col gap-1'>
+                <label className='text-sm text-gray-500'>Amount to buy</label>
                 <input
-                    className='p-2 border-2 border-b-cyan-900 text-black rounded w-full sm:w-24'
+                    className='border border-gray-300 rounded-lg p-2 text-black disabled:bg-gray-100 disabled:text-gray-400'
                     type="number"
-                    placeholder='Amount to buy'
+                    placeholder='e.g. 2'
                     value={quantityToBuy}
+                    disabled={!toBuy}
                     onChange={(e) => setQuantityToBuy(Number(e.target.value))}
                 />
-                <label className='flex items-center gap-2 text-black'>
-                    To buy
-                    <input
-                        className='w-6 h-6'
-                        type="checkbox"
-                        checked={toBuy}
-                        onChange={(e) => setToBuy(e.target.checked)}
-                    />
-                </label>
-                <div className='flex gap-2 w-full sm:w-auto'>
-                    <button
-                        className='flex-1 sm:flex-none border-2 rounded-2xl p-3 bg-green-600 text-white'
-                        type='submit'
-                    >
-                        Add
-                    </button>
-                    <button
-                        className='flex-1 sm:flex-none p-2 border rounded-2xl bg-red-600 text-white'
-                        type='button'
-                        onClick={() => setIsOpen(false)}
-                    >
-                        Cancel
-                    </button>
-                </div>
             </div>
-        </form>
-    )
+
+            <div className='flex flex-col gap-1 justify-center'>
+                <label className='text-sm text-gray-500'>To buy?</label>
+                <input
+                    className='w-6 h-6'
+                    type="checkbox"
+                    checked={toBuy}
+                    onChange={(e) => {
+                        setToBuy(e.target.checked)
+                        if (!e.target.checked) setQuantityToBuy(0)
+                    }}
+                />
+            </div>
+
+        </div>
+
+        <div className='flex gap-2'>
+            <button
+                className='flex-1 bg-green-600 text-white rounded-lg py-2'
+                type='submit'
+            >
+                Add
+            </button>
+            <button
+                className='flex-1 bg-red-500 text-white rounded-lg py-2'
+                type='button'
+                onClick={() => setIsOpen(false)}
+            >
+                Cancel
+            </button>
+        </div>
+
+    </form>
+)
+    
 }
